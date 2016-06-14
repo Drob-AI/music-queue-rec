@@ -57,6 +57,7 @@ toolbox.register("evaluate", eval_one_max)
 toolbox.register("mate", tools.cxTwoPoint)
 toolbox.register("mutate", mutate_path, indpb=0.3)
 toolbox.register("select", tools.selTournament, tournsize=3)
+hof = tools.HallOfFame(1, similar=similar_hof)
 
 def main():
     pop = toolbox.population(n=2000)
