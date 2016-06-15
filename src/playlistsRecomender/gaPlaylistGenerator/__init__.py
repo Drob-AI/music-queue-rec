@@ -1,1 +1,1 @@
-from ga_playlist_generator import *
+from ga_starters import *
