@@ -7,10 +7,12 @@ print('nice')
 data_set = dataProvider.import_folder( dir + '/dataProvider/data/dataset/yes_small/')
 
 @FLASK.route("/")
-def delete_dataset_info():
-    recomender = PlaylistGenerator(data_set=data_set)
-    hof = recomender.start()
-    print(list(hof));
+def create_playlist():
+    recomender = PlaylistGenerator(data_set=data_set, number_gen = 300,
+                                    playlist_size=10, gen_size = 100, mutate_pb = 0.7,
+                                    hof_size = 10)
+
+    hofs = recomender.start()
 
     # maximize the sum of the ids of all playlists:
-    return json.dumps(list(hof))
+    return json.dumps(list([list(hof) for hof in hofs]))
