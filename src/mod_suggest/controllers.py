@@ -5,12 +5,11 @@ import json
 
 print('nice')
 data_set = dataProvider.import_folder( dir + '/dataProvider/data/dataset/yes_small/')
+ids = list(set([song.id for playlist in data_set.train for song in playlist.songs]))
 
 @FLASK.route("/")
 def create_playlist():
-    recomender = PlaylistGenerator(data_set=data_set, number_gen = 300,
-                                    playlist_size=10, gen_size = 100, mutate_pb = 0.7,
-                                    hof_size = 10)
+    recomender = PlaylistGenerator(data_set=ids, playlist_size=10, hof_size = 20)
 
     hofs = recomender.start()
 
