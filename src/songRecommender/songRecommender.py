@@ -1,16 +1,16 @@
 import recsys.algorithm
 # Path hack.
-import sys, os
-sys.path.insert(0, os.path.abspath('..'))
-from data import tracks
-from data import all_tags
+# import sys, os
+# sys.path.insert(0, os.path.abspath('..'))
+from src.data import tracks
+from src.data import all_tags
 
 from recsys.algorithm.factorize import SVD
 
 recsys.algorithm.VERBOSE = True
 
 svd = SVD()
-svd.load_data(filename='../data/traindata.dat',
+svd.load_data(filename='./src/data/traindata.dat',
             sep=',',
             format={'col':0, 'row':1, 'value':2, 'ids': int})
 
