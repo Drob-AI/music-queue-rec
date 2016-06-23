@@ -9,7 +9,7 @@ import os
 from threading import Thread
 
 
-THREADS_NUMBER = 4
+THREADS_NUMBER = 3
 dir = os.path.dirname(os.path.realpath(__file__))
 GA_PARAMS = [
         # Creates less different playlists with not bad prob
