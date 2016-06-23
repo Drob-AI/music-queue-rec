@@ -147,7 +147,7 @@ all_tags = [];
 
 def read_author(raw_author):
      data_entries = [x for x in raw_author.split('\t') if x]
-     id = data_entries[1]
+     id = int(data_entries[1])
      name = urllib.unquote(json.loads(data_entries[3])["name"])
      return {
          "id": id,
@@ -163,7 +163,7 @@ def load_authors():
 
 def read_tag(raw_tag):
      data_entries = [x for x in raw_tag.split('\t') if x]
-     id = data_entries[1]
+     id = int(data_entries[1])
      raw_name_json = data_entries[3]
      raw_name_json = raw_name_json.replace('"u"','"');
      raw_name_json = raw_name_json.replace('""', '"');
@@ -192,13 +192,17 @@ def get_ids(arr):
 
 def get_track(raw_track):
     data_entries = [x for x in raw_track.split('\t') if x]
-    id = data_entries[1];
+    id = int(data_entries[1]);
     name = urllib.unquote(json.loads(data_entries[3])["name"])
     artists = get_ids(json.loads(data_entries[4])["artists"])
     song_tags = get_ids(json.loads(data_entries[4])["tags"])
+
     if (len(song_tags) == 0):
         song_tags = all_tags
+
     tracks[id] = {
+        "id": id,
+        "name", name,
         "artists": artists,
         "tags": song_tags
     }
@@ -222,5 +226,13 @@ def load_metadata():
         "tags": tags
     }
 
+def get_authors():
+    return authors
+
+def get_tracks():
+    return tracks
+
+def get_tags():
+    return tags
 
 load_metadata()
