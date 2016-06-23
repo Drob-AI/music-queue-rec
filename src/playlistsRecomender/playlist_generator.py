@@ -1,4 +1,3 @@
-import dataProvider
 import os
 import gaPlaylistGenerator as gaGenerator
 import numpy
@@ -8,7 +7,7 @@ from deap import creator, base, tools, algorithms
 import os
 from threading import Thread
 
-
+# max 9
 THREADS_NUMBER = 3
 dir = os.path.dirname(os.path.realpath(__file__))
 GA_PARAMS = [

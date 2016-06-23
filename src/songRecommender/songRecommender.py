@@ -1,22 +1,25 @@
 import recsys.algorithm
 # Path hack.
+# import sys, os
+# sys.path.insert(0, os.path.abspath('..'))
+from src.data import tracks
+from src.data import all_tags
 import sys, os
+from recsys.datamodel.data import Data
+from recsys.evaluation.prediction import RMSE, MAE
 sys.path.insert(0, os.path.abspath('..'))
-from data import tracks
-from data import all_tags
 
 from recsys.algorithm.factorize import SVD
 
 recsys.algorithm.VERBOSE = True
 
 svd = SVD()
-svd.load_data(filename='../data/traindata.dat',
+svd.load_data(filename='./src/data/traindata.dat',
             sep=',',
             format={'col':0, 'row':1, 'value':2, 'ids': int})
 
 k = 150
 svd.compute(k=k, min_values=1, pre_normalize=None, mean_center=True, post_normalize=True)
-# print(svd.recommend(1, only_unknowns=False, is_row=False))
 
 def hasTags(rec, tags):
     return len(set(tags).intersection(set(rec['tags']))) > 0
@@ -35,4 +38,32 @@ def recommendFor(user, tags=[], authors=[]):
         rec_tracks = filter(lambda track: hasAuthors(track, authors), rec_tracks)
     return rec_tracks;
 
-print recommendFor(1)
+def test():
+    data = Data()
+    format = {'col':0, 'row':1, 'value':2, 'ids': int}
+    svd = SVD()
+    data.load('../data/traindata.dat', sep=',', format=format)
+    train, test = data.split_train_test(percent=80) # 80% train, 20% test
+    svd.set_data(train)
+
+    k = 100
+    svd.compute(k=k, min_values=5, pre_normalize=None, mean_center=True, post_normalize=True)
+
+    rmse = RMSE()
+    mae = MAE()
+    i = 0
+    total = len(test.get())
+    for rating, item_id, user_id in test.get():
+        i = i + 1
+        print str(i) + '/' + str(total);
+        try:
+            pred_rating = svd.predict(item_id, user_id)
+            rmse.add(rating, pred_rating)
+            mae.add(rating, pred_rating)
+        except KeyError:
+            continue
+
+    print 'RMSE=%s' % rmse.compute()
+    print 'MAE=%s' % mae.compute()
+
+# test();
