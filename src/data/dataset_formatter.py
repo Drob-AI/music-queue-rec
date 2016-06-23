@@ -1,8 +1,12 @@
 import json
+import urllib 
 
 USER_LISTENS = '../../dataset/idomaar/relations/events.idomaar'
 USER_LIKES = '../../dataset/idomaar/relations/love.idomaar'
 PLAYLISTS = '../../dataset/idomaar/entities/playlist.idomaar'
+TRACKS = '../../dataset/idomaar/entities/tracks.idomaar'
+AUTHORS = '../../dataset/idomaar/entities/persons.idomaar'
+TAGS = '../../dataset/idomaar/entities/tags.idomaar'
 
 MAX_USERS = 5000
 
@@ -135,4 +139,88 @@ def read_train_data():
 
     trainingData.close()
 
-read_playlist_data()
+
+authors = {};
+tracks = {};
+tags = {};
+all_tags = [];
+
+def read_author(raw_author):
+     data_entries = [x for x in raw_author.split('\t') if x]
+     id = data_entries[1]
+     name = urllib.unquote(json.loads(data_entries[3])["name"])
+     return {
+         "id": id,
+         "name": name
+     }
+
+def load_authors():
+    with open(AUTHORS, 'r') as authors_file:
+        for line in authors_file:
+            author = read_author(line);
+            authors[author["id"]] = author["name"];
+    return authors;
+
+def read_tag(raw_tag):
+     data_entries = [x for x in raw_tag.split('\t') if x]
+     id = data_entries[1]
+     raw_name_json = data_entries[3]
+     raw_name_json = raw_name_json.replace('"u"','"');
+     raw_name_json = raw_name_json.replace('""', '"');
+     name = "THEGODOFDEATHAWAITSYOUALL"
+     try:
+        name = json.loads(raw_name_json)["value"]
+     except:
+        print 'omg'
+     return {
+         "id": id,
+         "name": name
+     }
+
+def load_tags():
+    with open(TAGS, 'r') as tags_file:
+        for line in tags_file:
+            tag = read_tag(line);
+            authors[tag["id"]] = tag["name"];
+    all_tags = tags.keys();
+    return tags;
+
+def get_ids(arr):
+    if (arr == None):
+        return []
+    return map(lambda x: x["id"], arr)
+
+def get_track(raw_track):
+    data_entries = [x for x in raw_track.split('\t') if x]
+    id = data_entries[1];
+    name = urllib.unquote(json.loads(data_entries[3])["name"])
+    artists = get_ids(json.loads(data_entries[4])["artists"])
+    song_tags = get_ids(json.loads(data_entries[4])["tags"])
+    if (len(song_tags) == 0):
+        song_tags = all_tags
+    tracks[id] = {
+        "artists": artists,
+        "tags": song_tags
+    }
+
+
+def get_tracks_data():
+    songs = []
+    with open(TRACKS, 'r') as tracks_file:
+        for line in tracks_file:
+            get_track(line)
+    
+    return tracks;
+
+def load_metadata():
+    load_authors();
+    load_tags();
+    get_tracks_data();
+    return {
+        "authors": authors,
+        "tracks": tracks,
+        "tags": tags
+    }
+
+
+load_metadata()
