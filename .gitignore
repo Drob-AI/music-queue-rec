@@ -75,6 +75,6 @@ pyvenv.cfg
 pip-selfcheck.json
 
 #Project files
-dataset*
+dataset/*
 python-recsys-master*
 virt*
