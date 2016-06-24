@@ -2,8 +2,8 @@ import recsys.algorithm
 # Path hack.
 # import sys, os
 # sys.path.insert(0, os.path.abspath('..'))
-# from src.data import tracks
-# from src.data import all_tags
+from src.data import tracks
+from src.data import all_tags
 import sys, os
 from recsys.datamodel.data import Data
 from recsys.evaluation.prediction import RMSE, MAE

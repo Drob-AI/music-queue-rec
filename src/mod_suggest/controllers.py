@@ -4,7 +4,7 @@ from src.playlistsRecomender import *
 import json
 from flask import request
 from src.songRecommender import *
-import src.data as dataProvider
+from src.data import tracks
 
 print('nice')
 # data_set = dataProvider.import_folder( dir + '/dataProvider/data/dataset/yes_small/')
@@ -24,7 +24,7 @@ def create_playlist():
     hofs = recomender.start()
 
     recommended = list([list(hof) for hof in hofs])
-    translated = [dataProvider.tracks[song['id']] for playlist in recommended for song in playlist]
+    translated = [[tracks[song] for song in playlist] for playlist in recommended ]
     # maximize the sum of the ids of all playlists:
-    print(translated)
+    print(translated[0], translated[1])
     return json.dumps(translated)
