@@ -133,8 +133,7 @@ class PlaylistGenerator:
         # gaGenerator.ga_start_silent(self.gen_size, self.toolbox, tools, self.ga_algorithms,
         #     self.hof, self.params)
         self.hofs = sorted(list([playlist for hof in self.hofs for playlist in list(hof)]),
-                        key=lambda pl: self.__eval_one_max(pl), reverse=True)
-
+                        key=lambda pl: self.__eval_one_max(pl), reverse=False)
 
         recomended_playlists = [self.hofs[0]]
         for playlist in self.hofs:

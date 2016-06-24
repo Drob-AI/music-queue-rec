@@ -31,7 +31,7 @@ def hasAuthors(rec, authors):
 def recommendFor(user, tags=[], authors=[]):
     tags = set(tags)
     authors = set(authors)
-    recommendations = svd.recommend(1, only_unknowns=False, is_row=False)
+    recommendations = svd.recommend(1, only_unknowns=False, is_row=False, n = 1000)
     rec_tracks = map(lambda rec: tracks[rec[0]], recommendations)
     if (len(tags) > 0):
         rec_tracks = filter(lambda track: hasTags(track, tags), rec_tracks)

@@ -23,8 +23,8 @@ LIKE_OBJECT_FIELD = 3
 
 TEST_PERCENTAGE = 0.2
 
-all_users = {};
-all_songs = {};
+all_users = {}
+all_songs = {}
 
 likes = {}
 
