@@ -2,14 +2,15 @@ import recsys.algorithm
 # Path hack.
 # import sys, os
 # sys.path.insert(0, os.path.abspath('..'))
-from src.data import tracks
-from src.data import all_tags
+# from src.data import tracks
+# from src.data import all_tags
 import sys, os
 from recsys.datamodel.data import Data
 from recsys.evaluation.prediction import RMSE, MAE
 sys.path.insert(0, os.path.abspath('..'))
 
 from recsys.algorithm.factorize import SVD
+from recsys.algorithm.factorize import SVDNeighbourhood
 
 recsys.algorithm.VERBOSE = True
 
@@ -18,8 +19,8 @@ svd.load_data(filename='./src/data/traindata.dat',
             sep=',',
             format={'col':0, 'row':1, 'value':2, 'ids': int})
 
-k = 150
-svd.compute(k=k, min_values=1, pre_normalize=None, mean_center=True, post_normalize=True)
+k = 100
+svd.compute(k=k, min_values=5, pre_normalize=None, mean_center=True, post_normalize=True)
 
 def hasTags(rec, tags):
     return len(set(tags).intersection(set(rec['tags']))) > 0
@@ -41,19 +42,20 @@ def recommendFor(user, tags=[], authors=[]):
 def test():
     data = Data()
     format = {'col':0, 'row':1, 'value':2, 'ids': int}
-    svd = SVD()
-    data.load('../data/traindata.dat', sep=',', format=format)
+    svd = SVD(Sk=2)
+    data.load('./src/data/traindata.dat', sep=',', format=format)
     train, test = data.split_train_test(percent=80) # 80% train, 20% test
     svd.set_data(train)
 
     k = 100
-    svd.compute(k=k, min_values=5, pre_normalize=None, mean_center=True, post_normalize=True)
+    svd.compute(k=k, min_values=1, pre_normalize=None, mean_center=True, post_normalize=True)
 
     rmse = RMSE()
     mae = MAE()
     i = 0
+
     total = len(test.get())
-    for rating, item_id, user_id in test.get():
+    for rating, item_id, user_id in tests:
         i = i + 1
         print str(i) + '/' + str(total);
         try:
@@ -66,4 +68,4 @@ def test():
     print 'RMSE=%s' % rmse.compute()
     print 'MAE=%s' % mae.compute()
 
-# test();
+# test()
