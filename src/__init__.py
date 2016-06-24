@@ -32,4 +32,4 @@ FLASK = Flask(__name__, static_url_path='/')
 # from mod_suggest import controllers
 
 from src.mod_suggest import controllers
-from songRecommender import *
+# from songRecommender import *
