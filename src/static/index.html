@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Playlist generator</title>
+        <script src="js/jslib/angular.js"></script>
+        <script src="js/jslib/jquery.js"></script>
+        <script src="js/jslib/bootstrap.js"></script>
+        <script src="js/jslib/angular-route.js"></script>
+        <script src="js/jslib/angular-resource.js"></script>
+        <script src="js/jslib/underscore.js"></script>
+        <script src="js/jslib/angularjs-dropdown-multiselect.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/controllers/main.js"></script>
+        <script src="js/controllers/root.js"></script>
+        <script src="js/controllers/playlist.js"></script>
+        <script src="js/services/playlistRepository.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    </head>
+    <body ng-app="playlist">
+        <div ng-controller="MainController">
+            <header class="dark">
+                <div class="container space rel">
+                    <div class="logo"></div>
+                    <div class="header-content">
+                        <div class="header-menu">
+                            <div class="headerContainer">
+                                <div class="title">
+                                    Playlist generator
+                                </div>
+                            </div>
+                        </div>
+                        <div class="header-tabs headerContainer">
+                            <div class="right">
+                                <a href="#/playlist" class="tab" ng-class="{selected: isSelected('playlist')}">
+                                    <div class="tab-triangle"></div>
+                                    <div>Playlists</div>
+                                </a>
+<!--                                 <a href="#/models" class="tab" ng-class="{selected: isSelected('models')}">
+                                    <div class="tab-triangle"></div>
+                                    <div>Language Models</div>
+                                </a>
+                                <a href="#/datasets" class="tab" ng-class="{selected: isSelected('datasets')}">
+                                    <div class="tab-triangle"></div>
+                                    <div>Datasets</div>
+                                </a> -->
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="content" ng-view></div>
+            <footer class="container-fluid"></footer>
+        </div>
+    </body>
+</html>

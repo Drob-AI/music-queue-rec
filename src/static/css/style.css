@@ -1,0 +1,513 @@
+body {
+	background-color: #27566B;
+	font-family: 'Open Sans Condensed', sans-serif;
+	max-width: 100%;
+	overflow-x: hidden;
+	font-size: 18px;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #103B4E;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #032331
+}
+
+.dark {
+	background-color:#032331;
+	color: #467488;
+}
+
+.medium-dark {
+	background-color: #103B4E;
+	color: #467488
+}
+
+.medium-light {
+	background-color: #467488;
+	color: #103B4E;
+}
+
+.light {
+	background-color: #7197A8;
+	color: #032331;
+}
+
+.primary {
+	background-color: #27566B;
+	color: #032331;
+}
+
+.white {
+	background-color: white;
+}
+
+header {
+	margin-top: 12px;
+	position: relative;
+}
+
+.space {
+	padding-top: 18px;
+	padding-bottom: 18px;
+}
+
+.rel {
+	position: relative;
+}
+
+.logo {
+	position: absolute;
+	left: 0;
+	background: url('../images/logo.png');
+	background-size: 100% 100%;
+	width: 100px;
+	height: 100px;
+}
+
+header .container {
+	height: 136px;
+}
+
+header .header-content {
+	position: absolute;
+	height: 100px;
+	left: 100px;
+	right: -100%;
+}
+
+header .headerContainer {
+	width: calc(1170px - 100px);
+	position: relative;
+	height: 100%;
+}
+
+header .title {
+	position: absolute;
+	left: 25px;
+	top: 4px;
+	height: 40px;
+	font-size: 50px;
+	line-height: 40px;
+}
+
+header .title::first-letter {
+	color: #7197A8;
+	font-weight: bold;field-overview
+}
+
+header .header-content .header-menu {
+	height: 52px;
+	border-bottom: 4px solid #27566B;
+}
+
+header .header-content .header-tabs {
+	height: 48px;
+}
+
+.right {
+	position: absolute;
+	height: 100%;
+	right: 0;
+}
+
+header .header-content a.tab {
+	height: 0;
+    display: block;
+	cursor: pointer;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid #27566B;
+	color: 467488;
+	line-height: 0;
+	float: right;
+	position: relative;
+}
+
+header .header-content a.tab.selected div {
+	border-bottom: 50px solid #27566B;
+	color: #032331;
+}
+
+header .header-content a.tab:hover, header .header-content a.tab:active , header .header-content a.tab:link {
+	text-decoration: none;
+}
+
+header .header-content a.tab:first-of-type {
+	border-bottom: 50px solid transparent;
+}
+
+header .header-content a.tab div {
+	position: relative;
+	top: 0;
+
+	margin-right: -44px;
+	height: 50px;
+	font-size: 24px;
+	display: block;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid #032331;
+	line-height: 50px;
+}
+
+header .header-content a.tab .tab-triangle {
+	left: -50px;
+	top: 0;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 50px 50px 0;
+	border-color: transparent #032331 transparent transparent;
+}
+
+header .header-content a.tab.selected .tab-triangle {
+	border-color: transparent #27566B transparent transparent;
+}
+
+header .header-content a.tab:hover .tab-triangle {
+	border-color: transparent #7197A8 transparent transparent;
+}
+
+header .header-content a.tab:hover div {
+	border-bottom: 50px solid #7197A8;
+	color: #103B4E;
+}
+
+.clearfix {
+	float: none;
+}
+
+.dataset-selector {
+	z-index: 10;
+	text-align: center;
+	position: relative;
+	height: 90px;
+	transition: all 0.5s;
+}
+
+.dataset-selector.empty {
+	margin-top: calc(50vh - 148px - 40px);
+	padding: 80px 0;
+	height: 250px;
+    box-shadow: 0px 0px 30px black;
+	transition: all 0.5s 0.5s;
+}
+
+.dataset-selector .selected {
+	padding: 10px 0px;
+	text-transform: uppercase;
+	font-size: 34px;
+	letter-spacing: 0.6em;
+	cursor: pointer;
+	border-bottom: 1px solid #103B4E;
+}
+
+.dataset-selector .selected:hover {
+	color: #032331;
+	border-bottom: 1px solid #032331;
+}
+
+.dataset-selector .selected.empty {
+
+}
+
+.dataset-selector .selected .glyphicon {
+	font-size: 0.8em;
+}
+
+.dataset-selector .datasets.visible {
+	max-height: 400px;
+}
+.dataset-selector .datasets {
+	position: absolute;
+	width: 756px;
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	box-shadow: 0px 2px 3px #103B4E;
+	border-radius: 0px 0px 5px 5px;
+	background-color: #27566B;
+	transition: all 0.5s;
+	height: auto;
+	max-height: 0px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.dataset-selector .datasets .dataset {
+	cursor: pointer;
+	width: 744px;
+	margin: auto;
+	padding: 10px 0;
+	height: 120px;
+	font-size: 24px;
+	background-color: #032331;
+	color: #27566B;
+	border-bottom: 1px solid #103B4E;
+}
+
+.dataset-selector .datasets .dataset.personal {
+	background: #7197A8;
+}
+
+.dataset-selector .datasets .dataset.user-submitted {
+	color: #032331;
+	background: #506078;
+}
+
+.user-submitted {
+	background: #506078;
+}
+
+
+.dataset-selector .datasets .dataset:hover, .dataset-selector .datasets .dataset.personal:hover, .dataset-selector .datasets .dataset.user-submitted:hover {
+	background: #467488;
+	color: #7197A8;
+}
+
+
+.dataset-selector .datasets .dataset:last-of-type {
+	border-bottom: none;
+}
+.dataset-selector .datasets .dataset .row {
+	height: 100px;
+}
+
+.dataset-selector .datasets .dataset .row .col-md-3, .dataset-selector .datasets .dataset .row .col-md-6 {
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+}
+
+.dataset-selector .datasets .dataset .row .col-md-3 span, .dataset-selector .datasets .dataset .row .col-md-6 span {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;
+}
+
+.dataset-selector .datasets .dataset .description {
+	font-size: 14px;
+	overflow: auto;
+}
+
+.dataset-selector .datasets .dataset-filter {
+	width: 100%;
+	display: flex;
+	height: 50px;
+}
+
+.dataset-selector .datasets .dataset-filter .filter {
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+	flex-grow: 1;
+	cursor: pointer;
+	font-size: 22px;
+}
+
+.dataset-selector .datasets .dataset-filter .filter:hover {
+	background-color: #467488 !important;
+	color: #032331 !important;
+}
+
+.overlay {
+	position: fixed;
+	top: 237px;
+	width: 100%;
+	height: calc(100vh - 237px);
+	background-color: black;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.5s 0.5s;
+}
+
+.empty .overlay {
+	transition: all 0.5s;
+}
+
+.overlay.visible {
+	opacity: 0.5
+}
+
+.fixed-height {
+	height: 100%;
+}
+
+.fixed-text {
+	overflow-y: hidden;
+	text-overflow: clip;
+}
+
+.scrollable {
+	overflow-y: scroll;
+}
+
+.dataset-overview {
+	height: 350px;
+	padding: 15px 0;
+}
+
+.dataset-overview table.table {
+	margin-bottom: 0;
+	font-size: 1.1em;
+}
+
+.dataset-overview table.table tr td, .dataset-overview table.table tr th {
+	border-top: none;
+}
+
+.dataset-overview table.table > thead > tr > th {
+	border-bottom: none;
+}
+
+.dataset-overview table.table > tbody > tr > td {
+	border-bottom: 1px solid #032331;
+}
+
+.dataset-overview table.table tr th {
+	white-space: nowrap !important;
+}
+
+.field-selector {
+	height: 68px;
+	border-bottom: 2px solid #103B4E;
+}
+
+.field-selector .fields {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.field-selector .field {
+	font-size: 20px;
+	display: inline-block;
+	background: #032331;
+	border: 2px solid #103B4E;
+	padding: 8px;
+	margin: 2px;
+	color: #7197A8;
+	cursor: pointer;
+}
+
+.field-selector .field.selected {
+	background: #506078;
+	color: #032331;
+}
+
+.field-selector .field:hover {
+	border: 2px solid #27566B;
+	color: #506078;
+}
+
+.field-selector .field.selected:hover {
+	color: #103B4E;
+}
+
+.form-control {
+	background-color: #032331;
+	color: #7197A8;
+	border: 1px solid #103B4E;
+}
+
+body > div > div > div.medium-dark.padded.ng-scope > div.field-selector.container.dark.ng-isolate-scope > div > div.col-md-3.text-right > span > input {
+	margin-top: 15px !important;
+}
+
+.a-bit-down {
+	margin-top: 25px;
+}
+
+.right-separator {
+	border-right: 1px solid #506078;
+}
+
+.field-overview {
+	height: 280px;
+	font-size: 1.2em !important;
+}
+
+.padded {
+	padding: 25px 0px;
+	min-height: 330px;
+	border-bottom: 5px solid #032331;
+}
+
+.row.underline {
+	border-bottom: 1px solid #032331;
+}
+
+div.jqcloud span.w4, div.jqcloud span.w3, div.jqcloud span.w2, div.jqcloud span.w1 {
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.fuck-you {
+	visibility: hidden;
+}
+
+.datachart .col-md-6 {
+	padding: 0;
+}
+
+.multiselect{
+	margin-top: 30px;
+}
+
+.multiselect .multiselect-parent button{
+	width: 200px;
+}
+
+.content{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.title{
+	color: #FFFFFF;
+    line-height: 90px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.create-playlist{
+	height: 35px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.user-inputs{
+	display: flex;
+    justify-content: center;
+}
+
+.playlist-table{
+	width: 90%;
+    align-self: center;
+    background-color: #e6e6e6;
+}
+
+.playlist-table thead{
+	color: black;
+}
+
+.playlist-table th, tbody {
+	text-align: center;
+}
