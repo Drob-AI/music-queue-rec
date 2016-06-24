@@ -153,7 +153,7 @@ all_tags = [];
 def read_author(raw_author):
      data_entries = [x for x in raw_author.split('\t') if x]
      id = int(data_entries[1])
-     name = urllib.unquote(json.loads(data_entries[3])["name"])
+     name = json.loads(data_entries[3])["name"]
      return {
          "id": id,
          "name": name
@@ -198,7 +198,7 @@ def get_ids(arr):
 def get_track(raw_track):
     data_entries = [x for x in raw_track.split('\t') if x]
     id = int(data_entries[1]);
-    name = urllib.unquote(json.loads(data_entries[3])["name"])
+    name = json.loads(data_entries[3])["name"]
     artists = get_ids(json.loads(data_entries[4])["artists"])
     song_tags = get_ids(json.loads(data_entries[4])["tags"])
 
