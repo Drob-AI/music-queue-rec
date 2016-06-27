@@ -1,0 +1,21 @@
+<div class="user-inputs">
+	<label class="title">Artists</label>
+	<div class="multiselect" ng-dropdown-multiselect="" options="allArtists" selected-model="selectedArtists" extra-settings="{enableSearch: true}"></div>
+	<label class="title">Genres</label>
+	<div class="multiselect" ng-dropdown-multiselect="" options="allTags" selected-model="selectedTags" extra-settings="{enableSearch: true}"></div>
+	<button class="btn btn-default create-playlist" ng-click="createPlaylist()">Create playlist!</button>
+</div>
+<div class="playlist-table">
+	<table class="table table-striped">
+		<thead>
+		  <tr>
+		    <th>Generated playlists</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr ng-repeat="songs in generatedPlaylist">
+		    <td><span ng-repeat="song in songs" class="title-delimiter">{{decodeUrlComponent(song.name)}} - </span></td>
+		  </tr>
+		</tbody>
+	</table>
+</div>
